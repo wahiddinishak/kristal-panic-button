@@ -24,6 +24,23 @@
     <button onclick="simpanIdentitas()" style="padding:10px 20px;">
       Simpan
     </button>
+
+    <br><br>
+    
+    <hr style="margin:30px 0;">
+
+    <div style="font-size:13px; color:#555;">
+      <p><strong>🔐 Keamanan & Privasi</strong></p>
+      <ul style="padding-left:18px;">
+        <li>Data identitas <strong>tidak akan keluar</strong> dari HP warga.</li>
+        <li>Data <strong>tidak tersimpan di server</strong>.</li>
+        <li>Jika HP hilang, maka data ikut hilang.</li>
+        <li>Jika warga ganti HP, silakan isi ulang data.</li>
+        <li>Jika HP dipakai bersama, <strong>jangan share panic button</strong>.</li>
+        <li>Reset data tersedia melalui tombol <strong>Ubah Identitas</strong>.</li>
+      </ul>
+    </div>
+    
   </div>
 
   <!-- PANIC BUTTON -->
@@ -43,6 +60,21 @@
     </button>
 
     <br><br>
+
+    <hr style="margin:30px 0;">
+
+    <div style="font-size:13px; color:#555; text-align:left;">
+      <p><strong>ℹ️ Saat warga menekan PANIC:</strong></p>
+      <ul style="padding-left:18px;">
+        <li>Lokasi GPS otomatis terambil.</li>
+        <li>Identitas warga ikut terkirim.</li>
+        <li>Waktu kejadian tercantum.</li>
+        <li>WhatsApp Security terbuka dengan pesan siap kirim.</li>
+      </ul>
+    </div>
+
+    <br><br>
+
     <button onclick="resetIdentitas()" style="font-size:12px;">
       Ubah Identitas
     </button>
@@ -101,7 +133,7 @@
         const waktu = new Date().toLocaleString('id-ID');
 
         const pesan =
-`🚨 DARURAT 🚨
+`DARURAT !!!
 
 Nama   : ${nama}
 Rumah  : ${rumah}

@@ -3,28 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panic Button Cluster</title>
-
-  <!-- PWA -->
+  <title>Kristal Panic Button</title>
   <link rel="manifest" href="manifest.json">
-
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; padding: 40px;">
 
-  <h1>🚨</h1>
-  <h1>Panic Button</h1>
-  <p>Aplikasi Gawat Darurat Bagi Warga Cluster Kristal Aryana</p>
+<body style="font-family: Arial, sans-serif; padding: 24px; max-width: 480px; margin: auto;">
 
-  <button style="
-    font-size: 24px;
-    padding: 20px 40px;
-    background: red;
-    color: white;
-    border: none;
-    border-radius: 10px;
-  ">
-    PANIC!
-  </button>
+  <h2>🚨</h2>
+  <h2>Kristal Panic Button</h2>
+
+  <!-- FORM IDENTITAS -->
+  <div id="form-identitas">
+    <p><strong>Isi Identitas (Sekali Saja)</strong></p>
+
+    <label>Nama Warga</label><br>
+    <input id="nama" type="text" style="width:100%; padding:8px;"><br><br>
+
+    <label>No Rumah (Contoh: L4-10)</label><br>
+    <input id="rumah" type="text" style="width:100%; padding:8px;"><br><br>
+
+    <button onclick="simpanIdentitas()" style="padding:10px 20px;">
+      Simpan Identitas
+    </button>
+  </div>
+
+  <!-- PANIC BUTTON -->
+  <div id="panic-area" style="display:none; text-align:center; margin-top:40px;">
+    <p><strong>Tekan tombol PANIC! saat DARURAT</strong></p>
+
+    <button onclick="panic()"
+      style="
+        font-size: 22px;
+        padding: 24px 40px;
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 12px;
+      ">
+      PANIC!
+    </button>
+
+    <br><br>
+    <button onclick="resetIdentitas()" style="font-size:12px;">
+      Ubah Identitas
+    </button>
+  </div>
+
+  <script>
+    const nama = localStorage.getItem('nama');
+    const rumah = localStorage.getItem('rumah');
+
+    if (nama && rumah) {
+      document.getElementById('form-identitas').style.display = 'none';
+      document.getElementById('panic-area').style.display = 'block';
+    }
+
+    function simpanIdentitas() {
+      const namaInput = document.getElementById('nama').value;
+      const rumahInput = document.getElementById('rumah').value;
+
+      if (!namaInput || !rumahInput) {
+        alert('Lengkapi identitas');
+        return;
+      }
+
+      localStorage.setItem('nama', namaInput);
+      localStorage.setItem('rumah', rumahInput);
+
+      location.reload();
+    }
+
+    function resetIdentitas() {
+      if (confirm('Ubah identitas warga?')) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+
+    function panic() {
+      alert('Tahap berikutnya: kirim ke WhatsApp');
+    }
+  </script>
 
   <script>
     if ('serviceWorker' in navigator) {

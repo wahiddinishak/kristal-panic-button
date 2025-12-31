@@ -13,7 +13,7 @@
 
   <h1>🚨</h1>
   <h1>Panic Button</h1>
-  <p>Aplikasi Darurat Warga Cluster Kristal Aryana</p>
+  <p>Aplikasi Gawat Darurat Bagi Warga Cluster Kristal Aryana</p>
 
   <button style="
     font-size: 24px;
@@ -23,8 +23,14 @@
     border: none;
     border-radius: 10px;
   ">
-    PANIC
+    PANIC!
   </button>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js');
+    }
+  </script>
 
 </body>
 </html>

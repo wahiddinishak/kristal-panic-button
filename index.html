@@ -9,12 +9,11 @@
 
 <body style="font-family: Arial, sans-serif; padding: 24px; max-width: 480px; margin: auto;">
 
-  <h2>🚨</h2>
-  <h2>Kristal Panic Button</h2>
+  <h2>🚨 Kristal Panic Button</h2>
 
   <!-- FORM IDENTITAS -->
   <div id="form-identitas">
-    <p><strong>Isi Identitas (Sekali Saja)</strong></p>
+    <p><strong>Pengisian Identitas Diperlukan dan Hanya Sekali Isi Saja.</strong></p>
 
     <label>Nama Warga</label><br>
     <input id="nama" type="text" style="width:100%; padding:8px;"><br><br>
@@ -23,7 +22,7 @@
     <input id="rumah" type="text" style="width:100%; padding:8px;"><br><br>
 
     <button onclick="simpanIdentitas()" style="padding:10px 20px;">
-      Simpan Identitas
+      Simpan
     </button>
   </div>
 
@@ -81,8 +80,51 @@
     }
 
     function panic() {
-      alert('Tahap berikutnya: kirim ke WhatsApp');
+
+        if (!confirm('Gunakan panic button hanya saat DARURAT. Lanjutkan?')) {
+          return;
+        }
+
+        const nama = localStorage.getItem('nama');
+    const rumah = localStorage.getItem('rumah');
+
+    if (!navigator.geolocation) {
+      alert('GPS tidak tersedia');
+      return;
     }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const waktu = new Date().toLocaleString('id-ID');
+
+        const pesan =
+`🚨 DARURAT 🚨
+
+Nama   : ${nama}
+Rumah  : ${rumah}
+Waktu  : ${waktu}
+Lokasi : https://maps.google.com/?q=${lat},${lon}
+
+Mohon bantuan segera!`;
+
+        const nomorSecurity = '6282122904511';
+
+        const url = `https://wa.me/${nomorSecurity}?text=${encodeURIComponent(pesan)}`;
+
+        window.location.href = url;
+      },
+      error => {
+        alert('Gagal mendapatkan lokasi. Aktifkan GPS.');
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000
+      }
+    );
+  }
   </script>
 
   <script>
